@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ثورة التحرير الجزائرية: ملحمة القرن العشرين</title>
+  <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <link rel="stylesheet" href="./tharwaa.css">  
+</head>
+<body>
+  <div class="custom-cursor"></div>
+  <div class="blood-drips"></div>
+
+<!-- Sidebar -->
+<aside id="sidebar">
+  <button id="toggle-btn" onclick="toggleSidebar()">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="m313-480 155 156q11 11 11.5 27.5T468-268q-11 11-28 11t-28-11L228-452q-6-6-8.5-13t-2.5-15q0-8 2.5-15t8.5-13l184-184q11-11 27.5-11.5T468-692q11 11 11 28t-11 28L313-480Zm264 0 155 156q11 11 11.5 27.5T732-268q-11 11-28 11t-28-11L492-452q-6-6-8.5-13t-2.5-15q0-8 2.5-15t8.5-13l184-184q11-11 27.5-11.5T732-692q11 11 11 28t-11 28L577-480Z"/></svg>
+    </svg>
+  </button>
+  <ul>
+    <li class="active">
+      <a href="#home">
+        <!-- Home Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#e8eaed">
+          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+        </svg>
+        <span>الرئيسية</span>
+      </a>
+    </li>
+    <li>
+      <a href="#timeline">
+        <!-- Timeline Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#e8eaed">
+          <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10z"/>
+          <path d="M7 15h10v2H7z" opacity="0.6"/>
+          <path d="M7 12h7v2H7z" opacity="0.4"/>
+          <path d="M7 9h4v2H7z" opacity="0.2"/>
+        </svg>
+        <span>الجدول الزمني</span>
+      </a>
+    </li>
+    <li>
+      <a href="#figures">
+        <!-- Figures Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#e8eaed">
+          <path d="M12 12c2.21 0 4-1.79 4-4S14.21 4 12 4 8 5.79 8 8s1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+        </svg>
+        <span>الشخصيات</span>
+      </a>
+    </li>
+    
+    <li>
+      <a href="#crimes">
+        <!-- Crimes Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+          <!-- First sword -->
+          <path d="M18 4l-4 4h3v8h-3l4 4 3-16z" fill="currentColor"/>
+          <!-- Second sword (crossed) -->
+          <path d="M6 20l4-4H7V8h3L6 4 3 20z" fill="currentColor"/>
+          <!-- Sword handles -->
+        </svg>
+        <span>الجرائم</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="#negotiations">
+        <!-- mofawadate Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#e8eaed">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm2-14h-4v2h4V6zm0 3h-4v2h4V9zm-4 3h4v2h-4v-2z"/>
+          <path d="M16.5 15.5l-1.4-1.4 1.4-1.4 1.4 1.4-1.4 1.4zM7.5 15.5l-1.4-1.4 1.4-1.4 1.4 1.4-1.4 1.4z" opacity="0.8"/>
+        </svg>
+        <span>المفاوضات</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="#statistics">
+        <!-- i7saiyate Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#e8eaed">
+          <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/>
+          <path d="M7 12h2v5H7zm4-7h2v12h-2zm4 4h2v8h-2z"/>
+        </svg>
+        <span>الاحصائيات</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="#videos">
+        <!-- i7saiyate Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#e8eaed">
+          <path d="M18 3v2h-2V3H8v2H6V3H4v18h2v-2h2v2h8v-2h2v2h2V3h-2zM8 17H6v-2h2v2zm0-4H6v-2h2v2zm0-4H6V7h2v2zm6 10h-4V5h4v14zm4-2h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2z"/>
+        </svg>
+        <span>الفيديوهات</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="#weapons">
+        <!-- Weapons Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#e8eaed">
+          <path d="M12 2L4 5v6c0 5.5 3.8 10.7 8 12 4.2-1.3 8-6.5 8-12V5l-8-3z"/>
+        </svg>
+        <span>السلاح</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="#legacy">
+        <!-- Legacy Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#e8eaed">
+          <path d="M16 11c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V18h14v-1.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V18h6v-1.5c0-2.33-4.67-3.5-7-3.5z"/>
+        </svg>
+        <span>الإرث</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="#map">
+        <!-- Legacy Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#e8eaed">
+    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+    <circle cx="15" cy="9" r="1" opacity="0.8"/>
+    <circle cx="9" cy="15" r="1" opacity="0.8"/>
+    <circle cx="17" cy="15" r="1" opacity="0.8"/>
+  </svg>
+        <span>الخريطة</span>
+      </a>
+    </li>
+  </ul>
+</aside>
+
+<section class="credits">
+  <div class="credit-content">
+    <p><strong>المُنشئون:</strong> بداوي عصام الدين & بن شاطر</p>
+    <p><strong>القسم:</strong> 1s2</p>
+    <p><strong>الاستاذة:</strong>واضح  & بوعلي</p>
+  </div>
+</section>
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1>ثورة التحرير الجزائرية</h1>
+      <p>سبع سنوات من البطولة صنعت تاريخ أمة</p>
+      <a href="#timeline" class="hero-btn">اكتشف القصة</a>
+    </div>
+  </section>
+
+
+  <section class="timeline-section" id="timeline">
+    <div class="section-header">
+      <h2>الجدول الزمني للثورة</h2>
+      <p>أهم المحطات في مسيرة التحرير</p>
+    </div>
+    <div class="timeline-container">
+      <div class="timeline-progress">
+        <div class="timeline-progress-bar"></div>
+      </div>
+      <!-- أحداث الجدول الزمني -->
+      <div class="timeline-item" data-section-theme="warm">
+        <div class="timeline-card">
+          <h3>23 مارس 1954</h3>
+          <p>تأسيس اللجنة الثورية للوحدة والعمل التي كانت النواة الأولى لانطلاق الثورة المسلحة</p>
+        </div>
+      </div>
+      <div class="timeline-item" data-section-theme="dark">
+        <div class="timeline-card">
+          <h3>1 نوفمبر 1954</h3>
+          <p>اندلاع الثورة الجزائرية عبر الهجمات المتزامنة في مختلف أنحاء البلاد</p>
+        </div>
+      </div>
+      <div class="timeline-item" data-section-theme="cool">
+        <div class="timeline-card">
+          <h3>مايو 1956</h3>
+          <p>اعتقال قادة الثورة في عملية القرصنة الجوية التي نفذها الاستعمار الفرنسي</p>
+        </div>
+      </div>
+      <div class="timeline-item" data-section-theme="bright">
+        <div class="timeline-card">
+          <h3>1957</h3>
+          <p>معركة الجزائر التي شهدت مواجهات عنيفة بين الثوار والقوات الفرنسية</p>
+        </div>
+      </div>
+      <div class="timeline-item" data-section-theme="dark">
+        <div class="timeline-card">
+          <h3>1960</h3>
+          <p>مظاهرات شعبية عارمة في مختلف المدن الجزائرية تؤكد تمسك الشعب بالاستقلال</p>
+        </div>
+      </div>
+      <div class="timeline-item" data-section-theme="cool">
+        <div class="timeline-card">
+          <h3>مارس 1962</h3>
+          <p>اتفاقية إيفيان التي أنهت الحرب وأقرت بحق الجزائر في الاستقلال</p>
+        </div>
+      </div>
+      <div class="timeline-item" data-section-theme="bright">
+        <div class="timeline-card">
+          <h3>يوليو 1962</h3>
+          <p>استفتاء الاستقلال وإعلان الجمهورية الجزائرية الديمقراطية الشعبية</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="figures-section" id="figures">
+    <div class="section-header">
+      <h2>أبرز الشخصيات</h2>
+      <p>قادة الثورة الذين صنعوا التاريخ</p>
+    </div>
+    <!-- Swiper -->
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+      <a href="https://ar.wikipedia.org/wiki/أحمد_بن_بلة#:~:text=أحمد%20بن%20بلّة%20(25%20ديسمبر,عام%201954%20واندلاع%20الثورة%20التحريرية.">
+          <div class="figure-image">
+            <img src="./imgs2/ahmedben.jpeg" alt="أحمد بن بلة - أول رئيس للجزائر المستقلة" />
+          </div>
+          <div class="figure-content">
+            <h3>أحمد بن بلة</h3>
+            <p style="color: #fff;">رمز الوحدة الوطنية وأول رئيس للجزائر المستقلة</p>
+          </div>
+        </div>
+      </a>
+        <div class="swiper-slide">
+          <a href="https://ar.wikiquote.org/wiki/هواري_بومدين">
+          <div class="figure-image">
+            <img src="./imgs2/hb.jpeg" alt="الحواري بومدين - القائد العسكري الشاب" />
+          </div>
+          <div class="figure-content">
+            <h3>الهواري بومدين</h3>
+            <p style="color: #fff;">القائد العسكري للثورة والرئيس الثاني للجزائر</p>
+          </div>
+        </div>
+      </a>
+        <div class="swiper-slide">
+          <a href="https://ar.wikipedia.org/wiki/كريم_بلقاسم">
+          <div class="figure-image">
+            <img src="./imgs2/karim.jpeg" alt="كريم بلقاسم - أحد مفجري الثورة" />
+          </div>
+          <div class="figure-content">
+            <h3>كريم بلقاسم</h3>
+            <p style="color: #fff;">أحد مفجري الثورة وقادة جبهة التحرير الوطني</p>
+          </div>
+        </div>
+      </a>
+
+        <div class="swiper-slide">
+          <a href="https://ar.wikipedia.org/wiki/العربي_بن_مهيدي">
+          <div class="figure-image">
+            <img src="./imgs2/larbi.jpeg" alt="العربي بن مهيدي - شهيد الثورة" />
+          </div>
+          <div class="figure-content">
+            <h3>العربي بن مهيدي</h3>
+            <p style="color: #fff;">من أبرز قادة الثورة الذي استشهد تحت التعذيب</p>
+          </div>
+        </div>
+      </a>
+
+        <div class="swiper-slide">
+          <a href="https://arz.wikipedia.org/wiki/فرحات_عباس">
+          <div class="figure-image">
+            <img src="./imgs2/farhatab.jpeg" alt="مصالي الحاج - شهيد الثورة" />
+          </div>
+          <div class="figure-content">
+            <h3>فرحات عباس </h3>
+            <p style="color: #fff;">زعيم سياسي، أول رئيس للحكومة المؤقتة للثورة الجزائرية.            </p>
+          </div>
+        </div>
+      </a>
+
+        <div class="swiper-slide">
+          <a href="https://ar.wikipedia.org/wiki/عبد_الحفيظ_بوصوف">
+          <div class="figure-image">
+            <img src="./imgs2/boussoufe.jpeg" alt="مصالي الحاج - شهيد الثورة" />
+          </div>
+          <div class="figure-content">
+            <h3>عبد الحفيظ بوصوف</h3>
+            <p style="color: #fff;">قائد ثوري، أسّس المخابرات الجزائرية خلال الثورة.</p>
+          </div>
+        </div>
+      </a>
+
+        <div class="swiper-slide">
+          <a href="https://ar.wikipedia.org/wiki/مصطفى_بن_بولعيد">
+          <div class="figure-image">
+            <img src="./imgs2/benboulaid.jpeg" alt="مصالي الحاج - شهيد الثورة" />
+          </div>
+          <div class="figure-content">
+            <h3>مصطفى بن بولعيد</h3>
+            <p style="color: #fff;">قائد المنطقة الأولى (الأوراس)</p>
+          </div>
+        </div>
+      </a>
+
+        <div class="swiper-slide">
+          <a href="https://ar.wikipedia.org/wiki/محمد_بوضياف">
+          <div class="figure-image">
+            <img src="./imgs2/boudiafe.jpeg" alt="محمد بوضياف - أحد قادة الثورة" />
+          </div>
+          <div class="figure-content">
+            <h3>محمد بوضياف</h3>
+            <p style="color: #fff;">أحد قادة الثورة ورئيس المجلس الأعلى للدولة</p>
+          </div>
+        </div>
+      </a>
+
+        <div class="swiper-slide">
+          <a href="https://ar.wikipedia.org/wiki/ديدوش_مراد">
+          <div class="figure-image">
+            <img src="./imgs2/didouche.jpeg" alt="ديدوش مراد - قائد الولاية الثانية" />
+          </div>
+          <div class="figure-content">
+            <h3>ديدوش مراد</h3>
+            <p style="color: #fff;">قائد الولاية الثانية التاريخية واستشهد في المعركة</p>
+          </div>
+        </div>
+      </a>
+        <div class="swiper-slide">
+          <a href="https://ar.wikipedia.org/wiki/عبان_رمضان">
+          <div class="figure-image">
+            <img src="./imgs2/abane.jpeg" alt="عبان رمضان- قائد الولاية الثانية" />
+          </div>
+          <div class="figure-content">
+            <h3>عبان رمضان</h3>
+            <p style="color: #fff;">من المفكرين والمنظمين السياسيين البارزين للثورة، وله دور كبير في مؤتمر الصومام (1956).</p>
+          </div>
+        </div>
+      </a>
+
+        <div class="swiper-slide">
+          <a href="https://ar.wikipedia.org/wiki/رابح_بيطاط">
+          <div class="figure-image">
+            <img src="./imgs2/bittat.jpeg" alt="رابح بيطاط- قائد الولاية الثانية" />
+          </div>
+          <div class="figure-content">
+            <h3>رابح بيطاط </h3>
+            <p style="color: #fff;">من أعضاء مجموعة الستة التي أطلقت الثورة، وأصبح لاحقًا رئيسًا للمجلس الشعبي الوطني.</p>
+          </div>
+        </div>
+      </a>
+        <div class="swiper-slide">
+          <a href="https://ar.wikipedia.org/wiki/حسين_آيت_أحمد">
+          <div class="figure-image">
+            <img src="./imgs2/hossine.jpeg" alt="حسين آيت أحمد- قائد الولاية الثانية" />
+          </div>
+          <div class="figure-content">
+            <h3>حسين آيت أحمد </h3>
+            <p style="color: #fff;">من أبرز القادة السياسيين ومفكري الثورة، استمر في النضال السياسي بعد الاستقلال هل ترغب في تفاصيل أكثر عن أحد هؤلاء القادة؟</p>
+          </div>
+        </div>
+       </div>
+      </a>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+  </section>
+<!-- قسم المفاوضات  -->
+<section class="negotiations-section" id="negotiations">
+  <div class="section-overlay"></div>
+  
+  <div class="container">
+    <header class="section-header">
+      <div class="section-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" fill="#e8eaed">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm2-14h-4v2h4V6zm0 3h-4v2h4V9zm-4 3h4v2h-4v-2z"/>
+          <path d="M16.5 15.5l-1.4-1.4 1.4-1.4 1.4 1.4-1.4 1.4zM7.5 15.5l-1.4-1.4 1.4-1.4 1.4 1.4-1.4 1.4z" opacity="0.8"/>
+        </svg>
+      </div>
+      <h2>المفاوضات والإرث التاريخي</h2>
+      <p class="section-subtitle">من القتال إلى الحوار: كيف بدأت الجزائر تُبنى من جديد</p>
+    </header>
+
+    <article class="section-content">
+      <div class="negotiation-timeline">
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <h3>اتصالات سرية (1960-1961)</h3>
+            <p>بداية الاتصالات غير الرسمية بين الطرفين في سويسرا وفرنسا</p>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <h3>مفاوضات إيفيان (1962)</h3>
+            <p>18 مارس 1962 - توقيع اتفاقيات إيفيان التي أنهت الحرب</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="negotiation-text">
+        <p>بعد سنوات من الكفاح المسلح، دخل الثوار في مفاوضات حاسمة أدّت إلى استقلال الجزائر. كانت المفاوضات مع فرنسا جزءًا لا يتجزأ من الثورة، حيث أظهر الشعب إصراره على السلام والبناء الوطني بعد الانتصار.</p>
+        <p>في هذه المرحلة، برزت أهمية الوحدة الوطنية وتآزر القبائل والأحزاب السياسية لإنشاء دولة مستقلة ذات هوية واضحة، عادت فيها الأمانة إلى الشعب ليكتب مستقبله بنفسه.</p>
+
+        <blockquote class="pull-quote">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#990000">
+            <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/>
+          </svg>
+          <div class="quote-content">
+            "الشعب الجزائري كتب تاريخه بدمائه، ورسم مستقبله بنضاله."
+            <span class="quote-author">- هواري بومدين</span>
+          </div>
+        </blockquote>
+      </div>
+    </article>
+  </div>
+</section>
+<!-- قسم الجرائم الاستعمارية والانتهاكات -->
+<section class="historical-section crimes-section" id="crimes">
+  <div class="section-header reveal">
+    <h2>الجرائم الاستعمارية والانتهاكات</h2>
+    <p>جرائم الحرب والاستعمار الفرنسي ضد الشعب الجزائري</p>
+  </div>
+
+  <div class="historical-content reveal">
+    <h3>مذبحة سطيف (8 مايو 1945)</h3>
+    <p>في الذكرى 82 لانتهاء الحرب العالمية الثانية، خرج الجزائريون في مظاهرات سلمية للمطالبة باستقلال بلادهم، لكن الجيش الفرنسي رد بعنف غير مسبوق:</p>
+    <ul>
+      <li>قُتل ما بين 6000 إلى 8000 جزائري في مجازر منظمة</li>
+      <li>تم استخدام الطائرات الحربية لقصف القرى</li>
+      <li>الآلاف من الجزائريين اختفوا أو أُعدموا دون محاكمة</li>
+      <li>الكثير من الضحايا دُفنوا في مقابر جماعية</li>
+    </ul>
+
+    <h3>التعذيب وانتهاكات حقوق الإنسان</h3>
+    <p>استخدمت القوات الفرنسية أساليب تعذيب ممنهجة ضد المعتقلين الجزائريين:</p>
+    <div class="evidence-grid">
+      <div class="evidence-card">
+        <h4>الصعق الكهربائي</h4>
+        <p>استخدام الصدمات الكهربائية على الأماكن الحساسة للجسم</p>
+      </div>
+      <div class="evidence-card">
+        <h4>الغرق الجزئي</h4>
+        <p>إغراق الضحية في الماء لفترة طويلة لإيهابها</p>
+      </div>
+      <div class="evidence-card">
+        <h4>الضرب المبرح</h4>
+        <p>استخدام العصي والحبال والأسلاك لضرب السجناء</p>
+      </div>
+      <div class="evidence-card">
+        <h4>الحرق</h4>
+        <p>حرق أجزاء من جسد المعتقلين بالسجائر أو المعادن الساخنة</p>
+      </div>
+    </div>
+
+    <h3>التشريد والتهجير القسري</h3>
+    <p>خلال الثورة، تم:</p>
+    <ul>
+      <li>تشريد أكثر من مليوني جزائري من قراهم</li>
+      <li>تدمير آلاف القرى والبلدات</li>
+      <li>نقل المدنيين إلى معسكرات "الترحيل"</li>
+    </ul>
+
+    <h3>التجارب النووية في الصحراء</h3>
+    <p>أجرى الاستعمار الفرنسي:</p>
+    <ul>
+      <li>4 تجارب نووية في رقان (1960-1961)</li>
+      <li>13 تجربة تحت الأرض في إين-أزمر (1961-1966)</li>
+      <li>تسببت في كارثة بيئية وإشعاعية مستمرة حتى اليوم</li>
+    </ul>
+
+    <div class="historical-quote">
+      <blockquote>
+        "الجرائم التي ارتكبها الاستعمار الفرنسي ليست مجرد ماضٍ يجب نسيانه، بل هي جزء من الذاكرة الوطنية التي تؤكد على ضرورة العدالة والحقيقة التاريخية."
+      </blockquote>
+    </div>
+  </div>
+</section>
+<!-- قسم الإحصائيات -->
+<section class="stats-section" id="statistics">
+  <div class="container">
+    <header class="section-header reveal">
+      <h2>الإحصائيات</h2>
+      <p>التضحيات التي كتبت الحرية</p>
+    </header>
+
+    <div class="stats-grid reveal">
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-skull-crossbones"></i></div>
+        <div class="stat-number" data-stat="1500000">+</div>
+        <div class="stat-label">شهيد</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-bandage"></i></div>
+        <div class="stat-number" data-stat="300000">+</div>
+        <div class="stat-label">جريح</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-home"></i></div>
+        <div class="stat-number" data-stat="2000000">+</div>
+        <div class="stat-label">نازح ومشرد</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-clock"></i></div>
+        <div class="stat-number" data-stat="8">سنوات</div>
+        <div class="stat-label">من الكفاح المسلح</div>
+      </div>
+    </div>
+
+    <div class="stats-footer reveal">
+      <p>هذه الأرقام تعكس فقط ما تم توثيقه رسميًا، أما الحقيقة الكاملة فتبقى مكتومة بين سطور التاريخ.</p>
+    </div>
+  </div>
+</section>
+
+  <section class="weapons-section" id="weapons">
+    <div class="section-header">
+      <h2>سلاح الثورة</h2>
+      <p>الأسلحة التي حملها المقاتلون في معركة التحرير</p>
+    </div>
+    <div class="weapons-grid">
+      <div class="weapon-card">
+        <div class="weapon-image">
+          <img src="./imgs2/kr98-removebg-preview.png" alt="مسدس كار 98 كيه - السلاح الرئيسي للمقاتلين" />
+        </div>
+        <div class="weapon-info">
+          <h3>كار 98 كيه</h3>
+          <p>البندقية الألمانية التي استولى عليها المقاتلون من القوات الاستعمارية وكانت السلاح الرئيسي للثوار</p>
+          <div class="weapon-details">
+            <span>نوع: بندقية رشاشة</span>
+            <span>عيار: 7.92×57mm</span>
+            <span>أصل: ألمانيا</span>
+          </div>
+        </div>
+      </div>
+      <div class="weapon-card">
+        <div class="weapon-image">
+          <img src="./imgs2/tomb-removebg-preview.png" alt="مسدس تومبسون - سلاح المقاومة السريعة" />
+        </div>
+        <div class="weapon-info">
+          <h3>تومبسون</h3>
+          <p>المسدس الأمريكي الذي استخدمه الثوار في الاشتباكات القريبة وكان سلاحًا مفضلاً لوحدات الكوماندوس</p>
+          <div class="weapon-details">
+            <span>نوع: مسدس رشاش</span>
+            <span>عيار: .45 ACP</span>
+            <span>أصل: الولايات المتحدة</span>
+          </div>
+        </div>
+      </div>
+      <div class="weapon-card">
+        <div class="weapon-image">
+          <img src="./imgs2/mat-removebg-preview.png" alt="بندقية مات 49 - سلاح المقاومة الشعبي" />
+        </div>
+        <div class="weapon-info">
+          <h3>مات 49</h3>
+          <p>البندقية الفرنسية التي استولى عليها المقاتلون من العدو واستخدموها ضده في حرب العصابات</p>
+          <div class="weapon-details">
+            <span>نوع: مسدس رشاش</span>
+            <span>عيار: 9×19mm</span>
+            <span>أصل: فرنسا</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="videos-section" id="videos">
+    <div class="section-header">
+      <h2>أفلام وثائقية</h2>
+      <p>شاهد مقاطع عن ثورة نوفمبر المجيدة</p>
+    </div>
+    <div class="video-grid">
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/hf2PFRs0i68" 
+          title="The Battle of Algiers - فيلم تاريخي مشهور"
+          allowfullscreen></iframe>
+        <div class="video-caption">الثورة الجزائرية - الجزيرة الوثائقية</div>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/Nmqw0XFR6eU"
+                title="The Battle of Algiers - فيلم تاريخي مشهور"
+                allowfullscreen></iframe>
+        <div class="video-caption">The Battle of Algiers - فيلم تاريخي مشهور</div>
+      </div>
+      
+    </div>
+  </section>
+  <section class="legacy-section" id="legacy">
+    <div class="section-header">
+      <h2>إرث الثورة</h2>
+      <p>التضحيات التي صنعت مستقبل الأمة</p>
+    </div>
+    <div class="legacy-content">
+      <p>خلّفت ثورة التحرير الجزائرية إرثًا عظيمًا لا يقتصر على الاستقلال الوطني فحسب، بل يمتد ليشكل هوية وطنية جامعة وروحًا ثورية ألهمت حركات التحرر في العالم أجمع.</p>
+      <p>ضحت الجزائر بأكثر من مليون ونصف المليون شهيد من أجل الحرية، وكانت الثورة نموذجًا للكفاح المسلح ضد الاستعمار، حيث جمعت بين العمل العسكري والدبلوماسي والنضال السياسي.</p>
+      <p>اليوم، تبقى قيم الثورة ومبادئها حية في وجدان الشعب الجزائري، تشكل مصدر فخر وطني وتذكير دائم بقيمة الحرية وثمن الاستقلال.</p>
+    </div>
+  </section>
+<!-- ✅ قسم الخريطة التفاعلية -->
+<section class="map-section" id="map">
+  <div class="section-header">
+    <h2>خريطة الثورة</h2>
+    <p>اكتشف مواقع المعارك الكبرى والمقرات الثورية</p>
+  </div>
+  <div class="map-container">
+    <!-- Map will appear here -->
+    <div id="revolution-map" style="height: 500px;"></div>
+  </div>
+</section>
+  <footer>
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="#home">الرئيسية</a>
+        <a href="#timeline">الجدول الزمني</a>
+        <a href="#figures">الشخصيات</a>
+        <a href="#weapons">السلاح</a>
+        <a href="#legacy">الإرث</a>
+      </div>
+      <div class="copyright">
+        &copy; 2025 ثورة التحرير الجزائرية - جميع الحقوق محفوظة
+      </div>
+      <p>created by : ISSAMEDDINE_BADAOUI & Anis Ben chater</p>
+      <P>  تحت اشراف:الاستاذة واضح امينة</P>
+    </div>
+  </footer>
+
+  <a href="#home" class="back-to-top">↑</a>
+
+  <!-- Swiper JS -->
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script src="./tharwaa.js"></script>
+</body>
+</html>
