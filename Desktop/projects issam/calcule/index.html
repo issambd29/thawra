@@ -1,82 +1,0 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="تطبيق متطور لحساب المعدل المدرسي مع مؤثرات بصرية">
-  <title> issam|calculate </title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-   <link rel="stylesheet" href="style.css">
-</head>
-<body class="light">
-    <div class="bg-animation" id="bg-animation"></div>
-  
-    <header>
-      <h1 class="animate__animated animate__fadeInDown">حاسبة المعدل الذكية</h1>
-      <p class="animate__animated animate__fadeIn">أداة متكاملة لحساب معدلك الدراسي بكل دقة</p>
-    </header>
-    
-    <nav>
-      <select id="level-select" class="animate__animated animate__fadeIn">
-        <option value="">اختر السنة الدراسية</option>
-        <optgroup label="التعليم الثانوي">
-          <option value="3" data-level="ثانوي">السنة الثالثة ثانوي</option>
-          <option value="2" data-level="ثانوي">السنة الثانية ثانوي</option>
-          <option value="1" data-level="ثانوي">السنة الأولى ثانوي</option>
-        </optgroup>
-        <optgroup label="التعليم المتوسط">
-          <option value="4" data-level="متوسط">السنة الرابعة متوسط</option>
-          <option value="3" data-level="متوسط">السنة الثالثة متوسط</option>
-          <option value="2" data-level="متوسط">السنة الثانية متوسط</option>
-          <option value="1" data-level="متوسط">السنة الأولى متوسط</option>
-        </optgroup>
-        <optgroup label="التعليم الابتدائي">
-          <option value="5" data-level="ابتدائي">السنة الخامسة ابتدائي</option>
-          <option value="4" data-level="ابتدائي">السنة الرابعة ابتدائي</option>
-          <option value="3" data-level="ابتدائي">السنة الثالثة ابتدائي</option>
-          <option value="2" data-level="ابتدائي">السنة الثانية ابتدائي</option>
-          <option value="1" data-level="ابتدائي">السنة الأولى ابتدائي</option>
-          <option value="0" data-level="ابتدائي">القسم التحضيري</option>
-        </optgroup>
-      </select>
-      <button id="mode-toggle" class="animate__animated animate__fadeIn">تبديل الوضع <span id="mode-icon">🌙</span></button>
-    </nav>
-  
-    <main>
-      <form id="subjects-form" class="hidden">
-        <table id="subjects-table">
-          <thead>
-            <tr>
-              <th>المادة</th>
-              <th>الفروض (25%)</th>
-              <th>الاختبارات (50%)</th>
-              <th>التقويم (25%)</th>
-              <th>المعامل</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Dynamically generated -->
-          </tbody>
-        </table>
-        
-        <div class="btn-group">
-          <button type="button" id="calculate-btn" class="pulse">احسب المعدل</button>
-          <button type="button" id="reset-btn">إعادة تعيين</button>
-        </div>
-      </form>
-  
-      <div id="result" class="hidden">
-        <h2>نتيجة الحساب</h2>
-        <p>المجموع: <span id="total"></span></p>
-        <p>المعدل: <span id="average"></span></p>
-        <p>التقدير: <span id="grade"></span></p>
-      </div>
-  
-      <div id="chart-container" class="hidden">
-        <canvas id="grades-chart"></canvas>
-      </div>
-    </main>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="script.js"></script>
-</body>
-</html>
