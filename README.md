@@ -1,2 +1,2 @@
-# remember
-This try to remember the git bush and the git hub
+# thawra
+A productivity app for organizing tasks with drag-and-drop functionality and team collaboration.
